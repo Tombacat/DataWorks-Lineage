@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<doc xmlns="http://www.ibm.com/iis/flow-doc">
+	<assets>
+		<asset class="$DataWorks-Service" repr="DataWorks-50" ID="a1">
+			<attribute name="name" value="DataWorks-50" />
+			<attribute name="$Plan" value="Starter" />
+		</asset>
+		<asset class="$DataWorks-Join" repr="Join_Source_CSource" ID="a2">
+			<attribute name="name" value="Join_Source_CSource" />
+			<attribute name="$LastRun" value="20 May 2016 at 11:17 AM" />
+			<reference name="$Service" assetIDs="a1" />
+		</asset>
+		<asset class="$DataWorks-Copy" repr="Source_to_CSource" ID="a3">
+			<attribute name="name" value="Source_to_CSource" />
+			<attribute name="$LastRun" value="20 May 2016 at 10:24 AM" />
+			<reference name="$Service" assetIDs="a1" />
+		</asset>
+		
+		<asset class="$DataWorks-Input" repr="Source" ID="a4">
+			<attribute name="name" value="Source" />
+			<attribute name="$Location" value="BLUDB/DASH018427" />
+			<reference name="$Activity" assetIDs="a3" />
+		</asset>
+		
+		<asset class="$DataWorks-Output" repr="CSource" ID="a5">
+			<attribute name="name" value="CSource" />
+			<attribute name="$Location" value="BLUDB/DASH018427" />
+			<reference name="$Activity" assetIDs="a3" />
+		</asset>
+
+		<asset class="$DataWorks-Action" repr="Truncate" ID="a6">
+			<attribute name="name" value="Truncate" />
+			<attribute name="$Logging" value="Action truncate was successful" />
+			<reference name="$Instance" assetIDs="a5" />
+		</asset>
+
+		<asset class="$DataWorks-Input" repr="Source" ID="a7">
+			<attribute name="name" value="Source" />
+			<attribute name="$Location" value="BLUDB/DASH018427" />
+			<reference name="$Activity" assetIDs="a2" />
+		</asset>
+		
+		<asset class="$DataWorks-Input" repr="CSource" ID="a8">
+			<attribute name="name" value="CSource" />
+			<attribute name="$Location" value="BLUDB/DASH018427" />
+			<reference name="$Activity" assetIDs="a2" />
+		</asset>
+		
+		<asset class="$DataWorks-Output" repr="JSource" ID="a9">
+			<attribute name="name" value="JSource" />
+			<attribute name="$Location" value="BLUDB/DASH018427" />
+			<reference name="$Activity" assetIDs="a2" />
+		</asset>
+
+		<asset class="$DataWorks-Action" repr="Remove" ID="a10">
+			<attribute name="name" value="Remove" />
+			<attribute name="$Logging" value="Remove the row if the column COCNUMBER is empty" />
+			<reference name="$Instance" assetIDs="a7" />
+		</asset>		
+		
+		<asset class="$DataWorks-Action" repr="Join" ID="a11">
+			<attribute name="name" value="Join" />
+			<attribute name="$Logging" value="Joined by CSOURCE" />
+			<reference name="$Instance" assetIDs="a7" />
+		</asset>
+		
+		<asset class="$DataWorks-Action" repr="Remove" ID="a12">
+			<attribute name="name" value="Remove" />
+			<attribute name="$Logging" value="Remove the row if the column COCNUMBER is empty" />
+			<reference name="$Instance" assetIDs="a8" />
+		</asset>		
+		
+		<asset class="$DataWorks-Action" repr="Replace" ID="a13">
+			<attribute name="name" value="Replace" />
+			<attribute name="$Logging" value="Action replace was successful" />
+			<reference name="$Instance" assetIDs="a9" />
+		</asset>
+	</assets>	
+	<importAction completeAssetIDs="a1"/>
+</doc> 

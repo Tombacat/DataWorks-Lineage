@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<doc xmlns="http://www.ibm.com/iis/flow-doc">
+	<assets>
+		<asset class="$DataWorks-Service" repr="DataWorks-50" ID="a1">
+			<attribute name="name" value="DataWorks-50" />
+		</asset>
+		
+		<asset class="$DataWorks-Join" repr="Join_Source_CSource" ID="a2">
+			<attribute name="name" value="Join_Source_CSource" />
+			<reference name="$Service" assetIDs="a1" />
+		</asset>
+		
+		<asset class="$DataWorks-Copy" repr="Source_to_CSource" ID="a3">
+			<attribute name="name" value="Source_to_CSource" />
+			<reference name="$Service" assetIDs="a1" />
+		</asset>
+		
+		<asset class="$DataWorks-Input" repr="Source" ID="a4">
+			<attribute name="name" value="Source" />
+			<reference name="$Activity" assetIDs="a3" />
+		</asset>
+		
+		<asset class="$DataWorks-Output" repr="CSource" ID="a5">
+			<attribute name="name" value="CSource" />
+			<reference name="$Activity" assetIDs="a3" />
+		</asset>
+
+		<asset class="$DataWorks-Input" repr="Source" ID="a7">
+			<attribute name="name" value="Source" />
+			<reference name="$Activity" assetIDs="a2" />
+		</asset>
+		
+		<asset class="$DataWorks-Input" repr="CSource" ID="a8">
+			<attribute name="name" value="CSource" />
+			<reference name="$Activity" assetIDs="a2" />
+		</asset>
+		
+		<asset class="$DataWorks-Output" repr="JSource" ID="a9">
+			<attribute name="name" value="JSource" />
+			<reference name="$Activity" assetIDs="a2" />
+		</asset>
+
+		<asset class="host" repr="IS-SERVER" ID="b1c497ce.354f5217.7pi583srf.2jbnklf.u99fdd.12slrsptduk4aos5h94s6">
+			<attribute name="name" value="IS-SERVER" />
+		</asset>
+		
+		<asset class="database" repr="BLUDB" ID="b1c497ce.6e83759b.7pi59j9do.oqjvqqk.qva8e8.lulkhl8isf791cnla7mne">
+			<attribute name="name" value="BLUDB" />
+			<reference name="host" assetIDs="b1c497ce.354f5217.7pi583srf.2jbnklf.u99fdd.12slrsptduk4aos5h94s6" />
+		</asset>
+		
+		<asset class="database_schema" repr="DASH018427" ID="b1c497ce.c1fb060b.7pi59j9do.oqjtvoa.k639pq.92rgarv3fp93fg6bpegq6">
+			<attribute name="name" value="DASH018427" />
+			<reference name="database" assetIDs="b1c497ce.6e83759b.7pi59j9do.oqjvqqk.qva8e8.lulkhl8isf791cnla7mne" />
+		</asset>
+		
+		<asset class="database_table" repr="SOURCE" ID="b1c497ce.54bd3a08.7pi59j9do.oqk44pi.l1kvf4.kikqefoc5q03ok78t04dl">
+			<attribute name="name" value="SOURCE" />
+			<reference name="database_schema" assetIDs="b1c497ce.c1fb060b.7pi59j9do.oqjtvoa.k639pq.92rgarv3fp93fg6bpegq6" />
+		</asset>
+
+		<asset class="database_table" repr="CSOURCE" ID="b1c497ce.54bd3a08.7pi59jbpg.vr73n7h.97i5d0.e7omrssnliitcad5rcfg3">
+			<attribute name="name" value="CSOURCE" />			
+			<reference name="database_schema" assetIDs="b1c497ce.c1fb060b.7pi59j9do.oqjtvoa.k639pq.92rgarv3fp93fg6bpegq6" />
+		</asset>
+
+		<asset class="database_table" repr="JSOURCE" ID="b1c497ce.54bd3a08.7pi59jbpg.vr77c31.njjd9e.kgisdk7fsr03kjvj0i7jn">
+			<attribute name="name" value="JSOURCE" />
+			<reference name="database_schema" assetIDs="b1c497ce.c1fb060b.7pi59j9do.oqjtvoa.k639pq.92rgarv3fp93fg6bpegq6" />
+		</asset>
+	</assets>
+	
+	<flowUnits>
+		<flowUnit assetID="a2">
+        	<subFlows flowType="DESIGN" comment="Join sources into target">
+				<flow sourceIDs="b1c497ce.54bd3a08.7pi59j9do.oqk44pi.l1kvf4.kikqefoc5q03ok78t04dl" targetIDs="a7"/>
+				<flow sourceIDs="b1c497ce.54bd3a08.7pi59jbpg.vr73n7h.97i5d0.e7omrssnliitcad5rcfg3" targetIDs="a8"/>
+				<flow sourceIDs="a9" targetIDs="b1c497ce.54bd3a08.7pi59jbpg.vr77c31.njjd9e.kgisdk7fsr03kjvj0i7jn"/>
+	            <flow sourceIDs="a7 a8" targetIDs="a9"/>
+        	</subFlows>
+        </flowUnit>
+        <flowUnit assetID="a3">
+        	<subFlows flowType="DESIGN" comment="Copy source to target">
+				<flow sourceIDs="b1c497ce.54bd3a08.7pi59j9do.oqk44pi.l1kvf4.kikqefoc5q03ok78t04dl" targetIDs="a3"/>
+				<flow sourceIDs="a5" targetIDs="b1c497ce.54bd3a08.7pi59jbpg.vr73n7h.97i5d0.e7omrssnliitcad5rcfg3"/>
+	            <flow sourceIDs="a3" targetIDs="a5"/>
+        	</subFlows>
+        </flowUnit>
+	</flowUnits>
+</doc> 
